@@ -1,0 +1,107 @@
+{
+    "rooms": [
+        {
+            "id": 1,
+            "name": "C1",
+            "floor": "1",
+            "size": 200
+        },
+        {
+            "id": 2,
+            "name": "S1",
+            "floor": "2",
+            "size": 40
+        },
+        {
+            "id": 3,
+            "name": "L403",
+            "floor": "2",
+            "size": 40
+        }
+    ],
+    "weekDays": [
+        {
+            "id": 9191,
+            "name": "Monday",
+            "start": 8,
+            "end": 20,
+            "closed":[],
+            "availableRooms": [
+                {
+                    "name": "C1"
+                },
+                {
+                    "name": "L403"
+                }
+            ]
+        },
+        {
+            "id": 9192,
+            "name": "Tuesday",
+            "start": 8,
+            "end": 20,
+            "closed": [ 
+                10,
+                12,
+                13,
+                14
+            ],
+            "availableRooms": [
+                {
+                    "name": "S1"
+                },
+                {
+                    "name": "L403"
+                }
+            ]
+        },
+        {
+            "id": 9193,
+            "name": "Wendsday",
+            "start": 10,
+            "end": 20,
+            "closed": [],
+            "availableRooms": [
+                {
+                    "name": "S1"
+                },
+                {
+                    "name": "L403"
+                }
+            ]
+        },
+        {
+            "id": 9194,
+            "name": "Thursday",
+            "start": 8,
+            "end": 18,
+            "closed": [12,13],
+            "availableRooms": [
+                {
+                    "name": "S1"
+                },
+                {
+                    "name": "L403"
+                }
+            ]
+        },
+        {
+            "id": 9195,
+            "name": "Friday",
+            "start": 8,
+            "end": 20,
+            "closed": [10,11],
+            "availableRooms": [
+                {
+                    "name": "C1"
+                },
+                {
+                    "name": "L403"
+                }
+            ]
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}
