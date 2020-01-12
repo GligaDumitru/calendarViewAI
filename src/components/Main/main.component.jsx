@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-// import Calendar from '../Calendar/calendar.component';
+import Calendar from '../Calendar/calendar.component';
 // import TeacherForm from '../TeacherForm/teacherForm.component'
 
 import {
@@ -36,7 +36,7 @@ export default class Main extends Component {
             <Switch>
                 <Route exact path="/">
                     <div>Stage 0</div>
-                    {/* <Calendar/> */}
+                    <Calendar/>
                     {/* <TeacherForm stage={10}/> */}
                 </Route>
                 <Route path="/stage1">
