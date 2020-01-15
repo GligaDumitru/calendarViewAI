@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 
-<<<<<<< HEAD
-// import Calendar from '../Calendar/calendar.component';
-import TeacherForm from '../TeacherForm/teacherForm.component'
-=======
 import Calendar from '../Calendar/calendar.component';
 // import TeacherForm from '../TeacherForm/teacherForm.component'
->>>>>>> af0fbaac87cb50f77d8c052aebb7f55414dd8bff
 
 import {
     BrowserRouter as Router,
@@ -41,13 +36,8 @@ export default class Main extends Component {
             <Switch>
                 <Route exact path="/">
                     <div>Stage 0</div>
-<<<<<<< HEAD
-                    {/* <Calendar/> */}
-                    <TeacherForm stage={10}/>
-=======
                     <Calendar/>
                     {/* <TeacherForm stage={10}/> */}
->>>>>>> af0fbaac87cb50f77d8c052aebb7f55414dd8bff
                 </Route>
                 <Route path="/stage1">
                 <div>Stage 1</div>

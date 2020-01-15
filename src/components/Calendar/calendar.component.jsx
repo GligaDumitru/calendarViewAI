@@ -61,16 +61,16 @@ export default class Calendar extends Component {
                                                     <div className="eventContainer">
                                                         <div className="event">
                                                             <span>Practi...</span>
-                                                            <i class="fas fa-eye"></i>
+                                                            <i className="fas fa-eye"></i>
 
                                                             <div className="smallDetails">
-                                                                <div class="blog-card">
-                                                                    <div class="meta">
-                                                                        <div class="photo" style={{ "background-image": "url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg" }}></div>
-                                                                        <ul class="details">
-                                                                            <li class="author"><a href="#">John Doe</a></li>
-                                                                            <li class="date">Aug. 24, 2015</li>
-                                                                            <li class="tags">
+                                                                <div className="blog-card">
+                                                                    <div className="meta">
+                                                                        <div className="photo" style={{ "background-image": "url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg" }}></div>
+                                                                        <ul className="details">
+                                                                            <li className="author"><a href="#">John Doe</a></li>
+                                                                            <li className="date">Aug. 24, 2015</li>
+                                                                            <li className="tags">
                                                                                 <ul>
                                                                                     <li><a href="#">Learn</a></li>
                                                                                     <li><a href="#">Code</a></li>
@@ -80,11 +80,11 @@ export default class Calendar extends Component {
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <div class="description">
+                                                                    <div className="description">
                                                                         <h1>Learning to Code</h1>
                                                                         <h2>Opening a door to the future</h2>
                                                                         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-                                                                        <p class="read-more">
+                                                                        <p className="read-more">
                                                                             <a href="#">Read More</a>
                                                                         </p>
                                                                     </div>
