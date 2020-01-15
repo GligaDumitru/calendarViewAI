@@ -1,0 +1,60 @@
+.form-check-input{
+     display: none;
+    &:checked + label {
+        border:1px solid rgb(0, 0, 0);
+    }
+}
+$fullColor:#f5c6db;
+$halfColor:#b8daff;
+$emptyColor:#d6d8db;
+.columTd{
+    &.option1{
+        background: $fullColor;
+        &:hover{
+            background: darken($fullColor,20%);
+            cursor: pointer;
+        }
+    }
+    &.option2{
+        background: $halfColor;
+        &:hover{
+            background: darken($halfColor,20%);
+            cursor: pointer;
+        }
+    }
+    &.option3{
+        background: $emptyColor;
+        &:hover{
+            background: darken($emptyColor,20%);
+            cursor: pointer;
+        }
+    }
+}
+
+.containerForCoursesCheckbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.form-check-label{
+    font-size: 20px;
+    padding: 5px;
+    border:1px solid transparent;
+    border-radius: 5px;
+    
+    &:hover{
+        border:1px solid #000;
+        cursor: pointer;
+        color:#000;
+    }
+  
+}
+
+.setStatus{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
