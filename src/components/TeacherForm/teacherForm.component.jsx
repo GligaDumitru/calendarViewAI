@@ -3,6 +3,7 @@ import "./teacherForm.style.scss";
 import { Link } from 'react-router-dom';
 import SetUpIntervals from '../SetUpIntervals/setUpIntervals.component'
 import axios from 'axios'
+import GenerateProgram from './../GenerateProgram/generateProgram.component';
 export default class TeacherForm extends Component {
     constructor(props) {
         super(props);
@@ -17,8 +18,8 @@ export default class TeacherForm extends Component {
             fullName: "",
             subjectForTeacher: [],
             numberOfCoursesForTeacher: [],
-            numerOfSeminariesForTeacher: [],
-            exactlyThisTeacher:{}
+            numberOfSeminariesForTeacher: [],
+            exactlyThisTeacher: {}
         }
     }
 
@@ -57,10 +58,10 @@ export default class TeacherForm extends Component {
                     idForTeacherSelected: teacher.id,
                     fullName: teacher.fullName,
                     subjectForTeacher: teacher.subject,
-                    numerOfSeminariesForTeacher: teacher.numerOfSeminaries,
+                    numberOfSeminariesForTeacher: teacher.numberOfSeminaries,
                     numberOfCoursesForTeacher: teacher.numberOfCourses,
-                    exactlyThisTeacher:teacher
-                },() => console.log("exactlyThisTeacher",this.state.exactlyThisTeacher))
+                    exactlyThisTeacher: teacher
+                }, () => console.log("exactlyThisTeacher", this.state.exactlyThisTeacher))
             }
         })
     }
@@ -68,11 +69,11 @@ export default class TeacherForm extends Component {
 
 
     render() {
-        const { idForTeacherSelected, fullName} = this.state;
+        const { idForTeacherSelected, fullName } = this.state;
         return this.props.stage ? (
             <div className="teacherFormContainer">
                 <form>
-                    
+
                     {/* {JSON.stringify(this.state)} */}
                     {
                         this.props.stage && this.props.stage === 10 &&
@@ -88,7 +89,28 @@ export default class TeacherForm extends Component {
                             </p>
                         </div>
                     }
-                     {
+                    {
+                        this.props.stage && this.props.stage === 99 &&
+                        <Fragment>
+                            <div className="jumbotron">
+                                <h2 className="display-4">Generare Orar</h2>
+                                <p className="lead">Se incarca....</p>
+                                <hr className="my-4" />
+                                <p>Dorim sa fiti cat mai sincer dar totusi sa va ganditi si la ceilalti colegi cand veti alege intervalele orare.</p>
+                                <p className="lead">
+                                    <Link className="btn btn-primary btn-lg" to="/stage1">
+                                        Prima pagina
+                                </Link>
+                                </p>
+
+                            </div>
+                            <div className="row">
+                                <GenerateProgram />
+                            </div>
+                        </Fragment>
+
+                    }
+                    {
                         this.props.stage && this.props.stage === 4 &&
                         <div className="jumbotron">
                             <h2 className="display-4">Multumim pentru raspuns.</h2>
@@ -163,7 +185,7 @@ export default class TeacherForm extends Component {
 
                                         <div className="form-group">
                                             <h6>{fullName} -{
-                                                this.state.subjectForTeacher.map((subject,index) => <span >{subject}</span>)
+                                                this.state.subjectForTeacher.map((subject, index) => <span >{subject}</span>)
                                             }</h6>
                                         </div>
                                         <div className="form-group">
@@ -184,7 +206,7 @@ export default class TeacherForm extends Component {
                                                             <img src="https://miro.medium.com/max/5400/1*8db3pXwTgRCn-wTJYjrOIw.jpeg" className="card-img-top" alt="..." />
                                                             <div className="card-body">
                                                                 <h5 className="card-title">Materie - {index + 1}.{subject}</h5>
-                                                                <p className="card-text">{`Pentru aceasta materie aveti ${this.state.numberOfCoursesForTeacher[index]} cursuri si ${this.state.numerOfSeminariesForTeacher[index]} seminarii.`}</p>
+                                                                <p className="card-text">{`Pentru aceasta materie aveti ${this.state.numberOfCoursesForTeacher[index]} cursuri si ${this.state.numberOfSeminariesForTeacher[index]} seminarii.`}</p>
                                                             </div>
                                                         </div>
                                                     )
@@ -199,12 +221,12 @@ export default class TeacherForm extends Component {
                                                 <li className="list-group-item list-group-item-secondary"><i className="fas fa-battery-empty" /> : Nu sunt disponibil in  aceest interval <br /></li>
                                             </ul>
                                         </div>
-                                        
+
                                         <div className="form-group">
-                                            
+
                                             <SetUpIntervals {...this.props} {...this.state} />
                                         </div>
-                                        
+
                                     </Fragment>
                                 ) : (
                                         <div className="form-group">

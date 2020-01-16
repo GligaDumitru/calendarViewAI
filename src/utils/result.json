@@ -481,7 +481,7 @@
                 "numberOfCourses": [
                     2
                 ],
-                "numerOfSeminaries": [
+                "numberOfSeminaries": [
                     6
                 ],
                 "tableColumnsForIntervals": [
@@ -1016,7 +1016,7 @@
                     2,
                     2
                 ],
-                "numerOfSeminaries": [
+                "numberOfSeminaries": [
                     7,
                     8
                 ]

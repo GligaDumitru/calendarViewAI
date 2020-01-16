@@ -8,7 +8,7 @@ export default class SetUpIntervals extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            tableColumnsForIntervals:(this.props.exactlyThisTeacher.tableColumnsForIntervals && this.props.exactlyThisTeacher.tableColumnsForIntervals.length && this.props.exactlyThisTeacher.tableColumnsForIntervals) || [
+            tableColumnsForIntervals: (this.props.exactlyThisTeacher.tableColumnsForIntervals && this.props.exactlyThisTeacher.tableColumnsForIntervals.length && this.props.exactlyThisTeacher.tableColumnsForIntervals) || [
                 ["", "", "", "", ""],
                 ["", "", "", "", ""],
                 ["", "", "", "", ""],
@@ -16,7 +16,7 @@ export default class SetUpIntervals extends Component {
                 ["", "", "", "", ""],
                 ["", "", "", "", ""],
             ],
-            tableColumnsForRooms:(this.props.exactlyThisTeacher.tableColumnsForRooms && this.props.exactlyThisTeacher.tableColumnsForRooms.length && this.props.exactlyThisTeacher.tableColumnsForRooms) || [ // 0 - curs, 1 - seminar
+            tableColumnsForRooms: (this.props.exactlyThisTeacher.tableColumnsForRooms && this.props.exactlyThisTeacher.tableColumnsForRooms.length && this.props.exactlyThisTeacher.tableColumnsForRooms) || [ // 0 - curs, 1 - seminar
                 [[true, true], [true, true], [true, true], [true, true], [true, true]],
                 [[true, true], [true, true], [true, true], [true, true], [true, true]],
                 [[true, true], [true, true], [true, true], [true, true], [true, true]],
@@ -29,7 +29,7 @@ export default class SetUpIntervals extends Component {
             showModal: false,
             showCurs: false,
             rooms: [],
-            tableColumsForClasses:(this.props.exactlyThisTeacher.tableColumsForClasses && this.props.exactlyThisTeacher.tableColumsForClasses.length && this.props.exactlyThisTeacher.tableColumsForClasses) || [
+            tableColumsForClasses: (this.props.exactlyThisTeacher.tableColumsForClasses && this.props.exactlyThisTeacher.tableColumsForClasses.length && this.props.exactlyThisTeacher.tableColumsForClasses) || [
                 [[], [], [], [], []],
                 [[], [], [], [], []],
                 [[], [], [], [], []],
@@ -59,8 +59,6 @@ export default class SetUpIntervals extends Component {
                     tempListClasses.push(`${room.id}${room.type}`)
                 })
 
-                console.log("tempTableColumsForClasses", tempTableColumsForClasses)
-
                 tempTableColumsForClasses.map((classEl, iR) => {
                     classEl.map((coll, iC) => {
                         coll = coll.filter((item, index) => coll.indexOf(item) === index)
@@ -80,14 +78,11 @@ export default class SetUpIntervals extends Component {
 
                 this.setState({
                     tableColumsForClasses: tempTableColumsForClasses
-                })
+                }, () => console.log("tableColumsForClasses", this.state.tableColumsForClasses))
             })
         })
     }
 
-    componentWillReceiveProps() {
-        console.log("will", this.props)
-    }
 
     handleOnChangeRadioInput = e => {
         let id = e.target.id;
@@ -112,18 +107,51 @@ export default class SetUpIntervals extends Component {
             tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][0] = true;
             tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][1] = true;
 
+            let tempTableColumsForClasses = [
+                [[], [], [], [], []],
+                [[], [], [], [], []],
+                [[], [], [], [], []],
+                [[], [], [], [], []],
+                [[], [], [], [], []],
+                [[], [], [], [], []]
+            ];
+            let tempListClasses = []
+            this.state.rooms.map(room => {
+                tempListClasses.push(`${room.id}${room.type}`)
+            })
+
+            tempTableColumsForClasses.map((classEl, iR) => {
+                classEl.map((coll, iC) => {
+                    // coll = coll.filter((item, index) => coll.indexOf(item) === index)
+                    tempListClasses.map(el => {
+                        let temp1 = true
+                        this.state.rooms.map(room => {
+                            if (`${room.id}${room.type}` === el && room.intervalDetails[iR][iC] === false) {
+                                temp1 = false
+                            }
+                        })
+                        if (temp1 === true) {
+                            coll.push(el)
+                        }
+                    })
+                })
+            })
             this.setState({
+                tableColumsForClasses: tempTableColumsForClasses,
                 tableColumnsForRooms: tempTableColumnsForRooms
-            }, () => this.checkForPosibleCourses())
+            }, () => {
+                console.log("tableColumsForClasses",this.state.rooms)
+                this.checkForPosibleCourses()
+            })
 
         }
         if (value === "option1") {
             let tempTableColumnsForRooms = this.state.tableColumnsForRooms;
 
-            if(tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][0] === false && tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][1] === false){
+            if (tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][0] === false && tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][1] === false) {
                 tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][0] = true;
                 tempTableColumnsForRooms[tempPosX - 1][tempPosY - 1][1] = true;
-    
+
                 this.setState({
                     tableColumnsForRooms: tempTableColumnsForRooms
                 }, () => this.checkForPosibleCourses())
@@ -200,9 +228,6 @@ export default class SetUpIntervals extends Component {
             modalPosInterval: tempArrPos
         })
     }
-
-    
-
     handleOnChangeCheckboxRoomsOnModal = e => {
         let id = e.target.id;
         // customCheckCourse9872-00
@@ -260,11 +285,11 @@ export default class SetUpIntervals extends Component {
                 teacherData = tch
             }
         })
-        let nrOfHoursForSeminaries = teacherData.numerOfSeminaries.reduce((a, b) => a + b, 0)
+        let nrOfHoursForSeminaries = teacherData.numberOfSeminaries.reduce((a, b) => a + b, 0)
         let nrOfHoursForCourses = teacherData.numberOfCourses.reduce((a, b) => a + b, 0)
 
 
-        const { lName, fName, email, fullName, subject, numberOfCourses, numerOfSeminaries } = teacherData;
+        const { lName, fName, email, fullName, subject, numberOfCourses, numberOfSeminaries } = teacherData;
 
         if (this.state.totalSelectedIntervalEmpty + this.state.totalSelectedIntervalFull + this.state.totalSelectedIntervalHalf === 30) {
             if (nrOfHoursForSeminaries <= this.state.posibleSeminaries) {
@@ -272,13 +297,14 @@ export default class SetUpIntervals extends Component {
                     if (30 - this.state.totalSelectedIntervalEmpty >= (nrOfHoursForSeminaries + nrOfHoursForCourses)) {
 
                         const teacher = {
+                            completed: true,
                             lName,
                             fName,
                             email,
                             fullName,
                             subject,
                             numberOfCourses,
-                            numerOfSeminaries,
+                            numberOfSeminaries,
                             posibleCourse: this.state.posibleCourse,
                             posibleSeminaries: this.state.posibleSeminaries,
                             totalSelectedInterval: this.state.totalSelectedInterval,
@@ -311,7 +337,6 @@ export default class SetUpIntervals extends Component {
     render() {
         return this.props.idForTeacherSelected && (
             <div className="setUpIntervalContainer">
-                {console.log("setUp", this.props)}
                 {this.state.totalSelectedInterval}
                 {
                     this.state.showModal && (
@@ -352,7 +377,7 @@ export default class SetUpIntervals extends Component {
                             this.props.teachers.map(teacher => {
                                 if (teacher.id === this.props.idForTeacherSelected) {
                                     let nrOfHoursForSeminaries = 0;
-                                    teacher.numerOfSeminaries.map(course => {
+                                    teacher.numberOfSeminaries.map(course => {
                                         nrOfHoursForSeminaries += course * 2
                                     })
 
@@ -443,6 +468,7 @@ export default class SetUpIntervals extends Component {
                         </table>
                     </div>
                 </div>
+
                 <div className="row">
                     <button onClick={this.handleOnSave} type="button" class="btn btn-primary">Finalizeaza</button>
                 </div>

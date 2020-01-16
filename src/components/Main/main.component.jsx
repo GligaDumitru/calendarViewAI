@@ -28,6 +28,9 @@ export default class Main extends Component {
                 <Route path="/successResponse">
                     <TeacherForm  stage={4} />
                 </Route>
+                <Route path="/generateProgram">
+                    <TeacherForm  stage={99} />
+                </Route>
                 <Route path="/errorResponse">
                     <TeacherForm stage={5} />
                 </Route>
