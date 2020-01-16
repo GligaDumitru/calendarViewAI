@@ -13,6 +13,19 @@ const getRoomsAvailableForInteval = (type, listOfRooms) => {
     return totalTypes
 }
 
+const checkIfUserIsNotAlreadyHere = (idTeacher, listOfRooms) => {
+    console.log("ce am primit",idTeacher,listOfRooms)
+    let result = true;
+
+    listOfRooms.map(room => {
+        if (room.profId === idTeacher) {
+            result = false;
+        }
+    })
+
+    return result;
+}
+
 const checkIfIdOfRoomIsNotUsedAlready = (listRooms, listOfObj) => {
     let tempRooms = [...listRooms]
     listOfObj.map(row => {
@@ -101,7 +114,7 @@ export default class GenerateProgram extends Component {
                                     }
                                 })
 
-                                if (getSumList(backupTeacher.numberOfCourses) > 0 && checkIfRoomIsAvailable(roomsAvailable[0], this.state.result[rowIndex][colIndex])) {
+                                if (getSumList(backupTeacher.numberOfCourses) > 0 && checkIfRoomIsAvailable(roomsAvailable[0], this.state.result[rowIndex][colIndex]) && checkIfUserIsNotAlreadyHere(backupTeacher.id, this.state.result[rowIndex][colIndex])) {
                                     let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfCourses)
                                     if (listOfTotalCourses !== false) {
 
@@ -158,28 +171,32 @@ export default class GenerateProgram extends Component {
                                         backupTeacher = tB
                                     }
                                 })
-                                let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfCourses)
+                                if (checkIfUserIsNotAlreadyHere(backupTeacher.id, this.state.result[rowIndex][colIndex])) {
 
-                                if (listOfTotalCourses !== false && getSumList(backupTeacher.numberOfCourses) > 0) {
-                                    let roomId = checkIfIdOfRoomIsNotUsedAlready(roomsAvailable, this.state.result[rowIndex][colIndex]);
-                                    if (roomId !== 0) {
-                                        let tempObj = {
-                                            roomId,
-                                            profId: teacher.id,
-                                        }
-                                        tempResult[rowIndex][colIndex].push(tempObj)
-                                        backupTeacher.numberOfCourses = listOfTotalCourses
-                                        teachersBackup.map(tB => {
-                                            if (tB.id === teacher.id) {
-                                                tB.numberOfCourses = backupTeacher.numberOfCourses
+
+                                    let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfCourses)
+
+                                    if (listOfTotalCourses !== false && getSumList(backupTeacher.numberOfCourses) > 0) {
+                                        let roomId = checkIfIdOfRoomIsNotUsedAlready(roomsAvailable, this.state.result[rowIndex][colIndex]);
+                                        if (roomId !== 0) {
+                                            let tempObj = {
+                                                roomId,
+                                                profId: teacher.id,
                                             }
-                                        })
-                                        this.setState({
-                                            result: tempResult,
+                                            tempResult[rowIndex][colIndex].push(tempObj)
+                                            backupTeacher.numberOfCourses = listOfTotalCourses
+                                            teachersBackup.map(tB => {
+                                                if (tB.id === teacher.id) {
+                                                    tB.numberOfCourses = backupTeacher.numberOfCourses
+                                                }
+                                            })
+                                            this.setState({
+                                                result: tempResult,
 
-                                        })
+                                            })
+                                        }
+
                                     }
-
                                 }
                             }
                         }
@@ -220,7 +237,7 @@ export default class GenerateProgram extends Component {
                                     }
                                 })
 
-                                if (getSumList(backupTeacher.numberOfSeminaries) > 0 && checkIfRoomIsAvailable(roomsAvailable[0], tempResult[rowIndex][colIndex]) !== false) {
+                                if (getSumList(backupTeacher.numberOfSeminaries) > 0 && checkIfRoomIsAvailable(roomsAvailable[0], tempResult[rowIndex][colIndex]) !== false && checkIfUserIsNotAlreadyHere(backupTeacher.id, this.state.result[rowIndex][colIndex])) {
                                     let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfSeminaries)
                                     if (listOfTotalCourses !== false) {
                                         tempResult[rowIndex][colIndex].push(tempObj)
@@ -275,7 +292,7 @@ export default class GenerateProgram extends Component {
 
                             if (getSumList(backupTeacher.numberOfCourses) > 0) {
                                 let roomId = checkIfIdOfRoomIsNotUsedAlready(roomsAvailableForCourse, this.state.result[rowIndex][colIndex]);
-                                if (roomId) {
+                                if (roomId && checkIfUserIsNotAlreadyHere(backupTeacher.id, this.state.result[rowIndex][colIndex])) {
                                     let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfCourses)
                                     if (listOfTotalCourses !== false) {
                                         let tempObj = {
@@ -353,28 +370,32 @@ export default class GenerateProgram extends Component {
                                         backupTeacher = tB
                                     }
                                 })
-                                let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfSeminaries)
+                                if (checkIfUserIsNotAlreadyHere(backupTeacher.id, this.state.result[rowIndex][colIndex])) {
 
-                                if (listOfTotalCourses !== false && getSumList(backupTeacher.numberOfSeminaries) >= 0) {
-                                    let roomId = checkIfIdOfRoomIsNotUsedAlready(roomsAvailable, this.state.result[rowIndex][colIndex]);
-                                    if (roomId !== 0) {
-                                        let tempObj = {
-                                            roomId,
-                                            profId: teacher.id,
-                                        }
-                                        tempResult[rowIndex][colIndex].push(tempObj)
-                                        backupTeacher.numberOfSeminaries = listOfTotalCourses
-                                        teachersBackup.map(tB => {
-                                            if (tB.id === teacher.id) {
-                                                tB.numberOfSeminaries = backupTeacher.numberOfSeminaries
+
+                                    let listOfTotalCourses = getBackupArrayOfCourses(backupTeacher.numberOfSeminaries)
+
+                                    if (listOfTotalCourses !== false && getSumList(backupTeacher.numberOfSeminaries) >= 0) {
+                                        let roomId = checkIfIdOfRoomIsNotUsedAlready(roomsAvailable, this.state.result[rowIndex][colIndex]);
+                                        if (roomId !== 0) {
+                                            let tempObj = {
+                                                roomId,
+                                                profId: teacher.id,
                                             }
-                                        })
-                                        this.setState({
-                                            result: tempResult,
+                                            tempResult[rowIndex][colIndex].push(tempObj)
+                                            backupTeacher.numberOfSeminaries = listOfTotalCourses
+                                            teachersBackup.map(tB => {
+                                                if (tB.id === teacher.id) {
+                                                    tB.numberOfSeminaries = backupTeacher.numberOfSeminaries
+                                                }
+                                            })
+                                            this.setState({
+                                                result: tempResult,
 
-                                        })
+                                            })
+                                        }
+
                                     }
-
                                 }
                             }
                         }
@@ -386,11 +407,11 @@ export default class GenerateProgram extends Component {
     componentDidMount() {
         let URI = "http://localhost:5000";
         axios.get(URI + "/rooms")
-        .then(res => {
-            this.setState({
-                rooms:res.data
+            .then(res => {
+                this.setState({
+                    rooms: res.data
+                })
             })
-        })
         axios.get(URI + "/teachers")
             .then(res => {
                 this.setState({

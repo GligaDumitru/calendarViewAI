@@ -489,12 +489,12 @@
     },
     {
       "completed": true,
-      "lName": "Admin2",
-      "fName": "Admin2",
-      "email": "admin2@yahoo.com",
-      "fullName": "Colab. Admin Admin",
+      "lName": "Dumitru",
+      "fName": "Gliga",
+      "email": "dumitru.gliga@yahoo.com",
+      "fullName": "Colab. Gliga Dumitru",
       "subject": [
-        "Matematica"
+        "Sport"
       ],
       "numberOfCourses": [
         2
@@ -1029,10 +1029,10 @@
     },
     {
       "completed": true,
-      "lName": "Admin",
-      "fName": "Admin",
+      "lName": "Brosca",
+      "fName": "Iulian",
       "email": "admin@yahoo.com",
-      "fullName": "Colab. Admin Admin",
+      "fullName": "Colab. Broasca Iulian",
       "subject": [
         "Matematica"
       ],
