@@ -4,5 +4,5 @@ Project Calendar-View at AI - UAIC
 
 In the project directory, you can run:
 
-![Image description]("./src/public/logo192.png")
+![Alert La Conflicte](https://github.com/GligaDumitru/calendarViewAI/blob/master/public/alertOnImage.PNG)
 
