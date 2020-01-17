@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import ConfigureInterval from '../ConfigureInterval/configureInterval.component';
 import "./setUpIntervals.style.scss"
 import ModalEditRooms from '../modalEditRooms/modalEditRooms.component'
+import ModalComments from '../modalComments/modalComments.component'
 import axios from 'axios';
 export default class SetUpIntervals extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            showCommentModal: false,
             tableColumnsForIntervals: (this.props.exactlyThisTeacher.tableColumnsForIntervals && this.props.exactlyThisTeacher.tableColumnsForIntervals.length && this.props.exactlyThisTeacher.tableColumnsForIntervals) || [
                 ["", "", "", "", ""],
                 ["", "", "", "", ""],
@@ -140,7 +142,7 @@ export default class SetUpIntervals extends Component {
                 tableColumsForClasses: tempTableColumsForClasses,
                 tableColumnsForRooms: tempTableColumnsForRooms
             }, () => {
-                console.log("tableColumsForClasses",this.state.rooms)
+                console.log("tableColumsForClasses", this.state.rooms)
                 this.checkForPosibleCourses()
             })
 
@@ -331,10 +333,20 @@ export default class SetUpIntervals extends Component {
         } else {
             alert(`Ai completat abia pentru ${this.state.totalSelectedIntervalEmpty + this.state.totalSelectedIntervalFull + this.state.totalSelectedIntervalHalf}/30 intervale.`);
         }
+    }
 
+    handleOnChangeSubmitComment = e => {
+        let id = e.target.id;
+        alert(id)
+    }
 
+    toggleModalComment = () => {
+        this.setState({
+            showCommentModal: !this.state.showCommentModal
+        })
     }
     render() {
+        
         return this.props.idForTeacherSelected && (
             <div className="setUpIntervalContainer">
                 {this.state.totalSelectedInterval}
@@ -345,6 +357,14 @@ export default class SetUpIntervals extends Component {
                         </div>
                     )
                 }
+                {
+                    this.state.showCommentModal && (
+                        <div className="containerForModalRooms">
+                            <ModalComments toggleModal={this.toggleModalComment} handleOnChangeSubmitComment={this.handleOnChangeSubmitComment} />
+                        </div>
+                    )
+                }
+
                 <div className="progress">
                     <div className="progress-bar" role="progressbar" style={{ "width": `${this.state.totalSelectedInterval}%` }} aria-valuenow={this.state.totalSelectedInterval} aria-valuemin="0" aria-valuemax="100">{this.state.totalSelectedInterval}%</div>
                 </div>
@@ -407,62 +427,62 @@ export default class SetUpIntervals extends Component {
                                     <td>
                                         8:00-10:00
                                     </td>
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={1} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={2} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={3} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={4} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={5} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={1} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={2} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={3} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={4} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={1} posY={5} />
                                 </tr>
                                 <tr>
                                     <td>
                                         8:00-10:00
                                     </td>
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={1} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={2} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={3} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={4} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={5} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={1} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={2} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={3} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={4} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={2} posY={5} />
                                 </tr>
                                 <tr>
                                     <td>
                                         8:00-10:00
                                     </td>
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={1} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={2} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={3} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={4} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={5} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={1} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={2} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={3} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={4} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={3} posY={5} />
                                 </tr>
                                 <tr>
                                     <td>
                                         8:00-10:00
                                     </td>
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={1} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={2} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={3} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={4} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={5} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={1} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={2} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={3} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={4} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={4} posY={5} />
                                 </tr>
                                 <tr>
                                     <td>
                                         8:00-10:00
                                     </td>
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={1} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={2} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={3} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={4} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={5} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={1} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={2} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={3} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={4} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={5} posY={5} />
                                 </tr>
                                 <tr>
 
                                     <td>
                                         8:00-10:00
                                     </td>
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={1} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={2} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={3} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={4} />
-                                    <ConfigureInterval rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={5} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={1} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={2} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={3} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={4} />
+                                    <ConfigureInterval toggleModalComment={this.toggleModalComment} rooms={this.state.rooms} toggleModal={this.toggleModal} handleOnCheckboxInput={this.handleOnCheckboxInput} tableColumnsForIntervals={this.state.tableColumnsForIntervals} tableColumnsForRooms={this.state.tableColumnsForRooms} handleOnChangeRadioInput={this.handleOnChangeRadioInput} posX={6} posY={5} />
                                 </tr>
                             </tbody>
                         </table>

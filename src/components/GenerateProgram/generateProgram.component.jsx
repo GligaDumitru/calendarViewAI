@@ -14,7 +14,7 @@ const getRoomsAvailableForInteval = (type, listOfRooms) => {
 }
 
 const checkIfUserIsNotAlreadyHere = (idTeacher, listOfRooms) => {
-    console.log("ce am primit",idTeacher,listOfRooms)
+    console.log("ce am primit", idTeacher, listOfRooms)
     let result = true;
 
     listOfRooms.map(room => {
@@ -466,10 +466,10 @@ export default class GenerateProgram extends Component {
                                         8:00-10:00
                                     </td>
                                     {
-                                        this.state.result[0].map(cols => {
+                                        this.state.result[0].map((cols,index) => {
                                             return <td>
-                                                {cols.map(rezervation => {
-                                                    return <ShowEvent rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
+                                                {cols.map((rezervation) => {
+                                                    return <ShowEvent posX={0} posY={index} rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
                                                 })}
                                             </td>
 
@@ -485,11 +485,10 @@ export default class GenerateProgram extends Component {
                                     {
                                         this.state.result[1].map(cols => {
                                             return <td>
-                                                {cols.map(rezervation => {
-                                                    return <ShowEvent rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
+                                                {cols.map((rezervation, index) => {
+                                                    return <ShowEvent posX={1} posY={index} rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
                                                 })}
                                             </td>
-
                                         })
                                     }
                                 </tr>
@@ -500,8 +499,8 @@ export default class GenerateProgram extends Component {
                                     {
                                         this.state.result[2].map(cols => {
                                             return <td>
-                                                {cols.map(rezervation => {
-                                                    return <ShowEvent rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
+                                                {cols.map((rezervation, index) => {
+                                                    return <ShowEvent posX={2} posY={index} rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
                                                 })}
                                             </td>
 
@@ -515,8 +514,8 @@ export default class GenerateProgram extends Component {
                                     {
                                         this.state.result[3].map(cols => {
                                             return <td>
-                                                {cols.map(rezervation => {
-                                                    return <ShowEvent rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
+                                                {cols.map((rezervation, index) => {
+                                                    return <ShowEvent posX={3} posY={index} rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
                                                 })}
                                             </td>
 
@@ -530,8 +529,8 @@ export default class GenerateProgram extends Component {
                                     {
                                         this.state.result[4].map(cols => {
                                             return <td>
-                                                {cols.map(rezervation => {
-                                                    return <ShowEvent rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
+                                                {cols.map((rezervation, index) => {
+                                                    return <ShowEvent posX={4} posY={index} rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
                                                 })}
                                             </td>
 
@@ -546,8 +545,8 @@ export default class GenerateProgram extends Component {
                                     {
                                         this.state.result[5].map(cols => {
                                             return <td>
-                                                {cols.map(rezervation => {
-                                                    return <ShowEvent rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
+                                                {cols.map((rezervation,index) => {
+                                                    return <ShowEvent posX={5} posY={index} rooms={this.state.rooms} teachers={this.state.teachers} rezervation={rezervation} />
                                                 })}
                                             </td>
 

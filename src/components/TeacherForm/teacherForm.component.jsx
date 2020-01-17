@@ -73,7 +73,6 @@ export default class TeacherForm extends Component {
         return this.props.stage ? (
             <div className="teacherFormContainer">
                 <form>
-
                     {/* {JSON.stringify(this.state)} */}
                     {
                         this.props.stage && this.props.stage === 10 &&

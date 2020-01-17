@@ -65,9 +65,9 @@ export default class ConfigureInterval extends Component {
                         </div>
                     </div>
                     {
-                        tableColumnsForIntervals[posX - 1][posY - 1] === "option1" && (
+                       this.props.toggleModalComment && tableColumnsForIntervals[posX - 1][posY - 1] === "option1" && (
                         <div>
-                            <button type="button" class="btn btn-outline-info"><i class="fas fa-comment-dots"></i> Comentarii</button>
+                            <button onClick={this.props.toggleModalComment} type="button" class="btn btn-outline-info"><i class="fas fa-comment-dots"></i> Comentarii</button>
                         </div>)
                     }
 
